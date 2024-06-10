@@ -8,12 +8,24 @@ function doIt() {
 	rsync --exclude ".git/" \
 		--exclude ".DS_Store" \
 		--exclude ".osx" \
+		--exclude "script.py" \
 		--exclude "bootstrap.sh" \
 		--exclude "README.md" \
 		--exclude "LICENSE-MIT.txt" \
 		-avh --no-perms . ~;
-	source ~/.bash_profile;
 }
+
+GITCONFIG_INCLUDE=$'[include]\n\tpath = $HOME/includes/.gitconfig'
+ZSHRC_INCLUDE=$'source $HOME/includes/.zshrc'
+
+
+
+if ! grep -q "includes/.gitignore" "$HOME/.gitignore"; then
+	echo "$GITCONFIG_INCLUDE" >> $HOME/.gitignore
+fi
+if ! grep -q "$ZSHRC_INCLUDE" "$HOME/.zshrc"; then
+	echo "$ZSHRC_INCLUDE" >> $HOME/.zshrc
+fi
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
 	doIt;
