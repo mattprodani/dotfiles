@@ -145,4 +145,4 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # SSH aliases
 alias s=ssh
-alias sc="ssh cdesk"
+alias sc="tmuxssh cdesk main"

@@ -1,4 +1,13 @@
 
+# for client
+function tmuxssh() {
+	if [ "$#" -ne 2 ]; then
+		echo "Usage: tmuxssh host session_name "
+	else
+		ssh -t $1 tmux -u new -A -s $2
+	fi
+}
+
 # Create a new directory and enter it
 function mkd() {
 	mkdir -p "$@" && cd "$_";
